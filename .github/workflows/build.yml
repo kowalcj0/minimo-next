@@ -1,0 +1,22 @@
+name: Build
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: ['**']
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    # Non-owner PRs use a protected environment that requires manual approval
+    # from the repository owner. Configure it in Settings > Environments.
+    environment: ${{ github.event_name == 'pull_request' && github.actor != 'kowalcj0' && 'manual-approval' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+      - run: npm ci
+      - run: npm run build
