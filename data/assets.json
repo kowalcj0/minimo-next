@@ -1,31 +1,31 @@
 {
+  "main": {
+    "js": "main.442ec8d0.js",
+    "css": "main.bc280058.css"
+  },
   "algolia_search": {
-    "js": "algolia_search.3c88c657.js"
-  },
-  "comments": {
-    "js": "comments.8316cbbf.js"
-  },
-  "details-polyfill": {
-    "js": "details-polyfill.57b4e5ce.js"
+    "js": "algolia_search.a7d26b56.js"
   },
   "fuse_search": {
-    "js": "fuse_search.5a8b4fd6.js"
+    "js": "fuse_search.2a5df590.js"
   },
   "lunr_search": {
-    "js": "lunr_search.43c384a1.js"
-  },
-  "main": {
-    "css": "main.e45c9137.css",
-    "js": "main.56dcff95.js"
+    "js": "lunr_search.c68bc19d.js"
   },
   "rtl": {
-    "css": "rtl.e580af8f.css",
-    "js": "rtl.cebcaee5.js"
+    "js": "rtl.d1cf7105.js",
+    "css": "rtl.672b1cc9.css"
   },
-  "sidebar": {
-    "js": "sidebar.8b55e6c1.js"
+  "details-polyfill": {
+    "js": "details-polyfill.9f13d93d.js"
   },
   "twemoji": {
-    "js": "twemoji.b04127dd.js"
+    "js": "twemoji.e62ddfe4.js"
+  },
+  "sidebar": {
+    "js": "sidebar.3f85c567.js"
+  },
+  "comments": {
+    "js": "comments.eeff484b.js"
   }
 }
