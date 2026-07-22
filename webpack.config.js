@@ -55,8 +55,7 @@ const config = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env'],
-            plugins: ['@babel/plugin-syntax-dynamic-import']
+            presets: ['@babel/preset-env']
           }
         }
       },
@@ -74,17 +73,19 @@ const config = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: [
-                autoprefixer(),
-                'production' === node_env
-                  ? cssnano({
-                      preset: [
-                        'default',
-                        { discardComments: { removeAllButFirst: true } }
-                      ]
-                    })
-                  : null
-              ].filter(Boolean)
+              postcssOptions: {
+                plugins: [
+                  autoprefixer(),
+                  'production' === node_env
+                    ? cssnano({
+                        preset: [
+                          'default',
+                          { discardComments: { removeAllButFirst: true } }
+                        ]
+                      })
+                    : null
+                ].filter(Boolean)
+              }
             }
           },
           'sass-loader'
