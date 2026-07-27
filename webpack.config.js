@@ -2,7 +2,6 @@ const path = require('path')
 const autoprefixer = require('autoprefixer')
 const cssnano = require('cssnano')
 const AssetsWebpackPlugin = require('assets-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCSSExtractPlugin = require('mini-css-extract-plugin')
 
 const assetsManifest = new AssetsWebpackPlugin({
@@ -21,14 +20,7 @@ const assetsManifest = new AssetsWebpackPlugin({
 })
 
 const extractCSS = new MiniCSSExtractPlugin({
-  filename: '../css/[name].[contenthash:8].css'
-})
-
-const cleanBuild = new CleanWebpackPlugin({
-  cleanOnceBeforeBuildPatterns: [
-    path.resolve('static/assets/css/*'),
-    path.resolve('static/assets/js/*')
-  ]
+  filename: 'css/[name].[contenthash:8].css'
 })
 
 const node_env = process.env.NODE_ENV
@@ -43,9 +35,10 @@ const config = {
     rtl: path.join(__dirname, 'src/stylesheets', 'rtl.scss')
   },
   output: {
-    filename: '[name].[chunkhash:8].js',
-    chunkFilename: '[name].[chunkhash:8].js',
-    path: path.join(__dirname, 'static', 'assets/js')
+    filename: 'js/[name].[chunkhash:8].js',
+    chunkFilename: 'js/[name].[chunkhash:8].js',
+    path: path.join(__dirname, 'static', 'assets'),
+    clean: true
   },
   module: {
     rules: [
@@ -88,7 +81,15 @@ const config = {
               }
             }
           },
-          'sass-loader'
+          {
+            loader: 'sass-loader',
+            options: {
+              sassOptions: {
+                loadPaths: [path.resolve(__dirname, 'node_modules')],
+                silenceDeprecations: ['import']
+              }
+            }
+          }
         ]
       }
     ]
@@ -98,7 +99,5 @@ const config = {
   },
   plugins: [extractCSS, assetsManifest]
 }
-
-if (node_env === 'production') config.plugins.push(cleanBuild)
 
 module.exports = config

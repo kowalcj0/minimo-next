@@ -1,4 +1,4 @@
-import algoliasearch from 'algoliasearch/lite'
+import { liteClient } from 'algoliasearch/lite'
 
 import {
   appendResults,
@@ -8,11 +8,7 @@ import {
 
 const { appId, indexName, searchApiKey } = window.algolia
 
-const client = algoliasearch(appId, searchApiKey)
-
-const index = client.initIndex(
-  `${indexName}${window.location.pathname.replace('/search/', '')}`
-)
+const client = liteClient(appId, searchApiKey)
 
 const doSearch = (term, resultsBlock) => {
   setSearchingIndicator(resultsBlock)
@@ -20,14 +16,23 @@ const doSearch = (term, resultsBlock) => {
   if (!term) {
     appendResults([], resultsBlock)
   } else {
-    index.search(
-      term,
-      { attributesToRetrieve: ['title', 'href'], hitsPerPage: 10 },
-      (err, content) => {
-        if (err) console.error(err)
-        else appendResults(content.hits, resultsBlock)
-      }
-    )
+    client
+      .searchForHits({
+        requests: [
+          {
+            indexName: `${indexName}${window.location.pathname.replace('/search/', '')}`,
+            query: term,
+            attributesToRetrieve: ['title', 'href'],
+            hitsPerPage: 10
+          }
+        ]
+      })
+      .then(({ results }) => {
+        appendResults(results[0].hits, resultsBlock)
+      })
+      .catch(err => {
+        console.error(err)
+      })
   }
 }
 

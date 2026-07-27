@@ -1,3 +1,2 @@
-@import 'variables/variables';
-
-@import 'mixins/mixins';
+@forward 'variables/variables';
+@forward 'mixins/mixins';

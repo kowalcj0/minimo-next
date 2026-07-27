@@ -14,7 +14,7 @@
     <h3>{{ .Key }}</h3>
     <ul class='list'>
       {{ range  .Pages }}
-        {{ .Render "li.archive" }}
+        {{ partial "list/li.archive" . }}
       {{ end }}
     </ul>
   </div>
