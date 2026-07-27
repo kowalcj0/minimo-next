@@ -4,11 +4,27 @@
 
 - ...
 
-## [2.10.1] - 2022-09-21
+## [2.11.0] - 2026-07-27
+
+Summary: This release is primarily a compatibility & maintenance update. The key changes ensure the theme works cleanly on modern Hugo versions (v0.156–v0.163+) by addressing all deprecation warnings. 
+Additionally, Mastodon social icon support was added, CI via GitHub Actions was introduced, and dependencies were brought up to date.
+
+### Added
+
+- Mastodon social support — Add Mastodon to the social menu icons (PR #174 (https://github.com/MunifTanjim/minimo/pull/174))
+- GitHub Actions workflow — Simple CI workflow added for the project
 
 ### Changed
 
-- Update theme config
+- Node.js bumped to v25 — Updated Node runtime version
+- All dependencies updated — Full dependency update across the project
+
+### Fixed
+
+- DisqusShortname deprecated — Fixed deprecated DisqusShortname usage (Issue #351 (https://github.com/MunifTanjim/minimo/issues/351))
+- .Site.Data deprecated — Migrated from .Site.Data to hugo.Data (deprecated in Hugo v0.156.0)
+- .Language.LanguageDirection deprecated — Migrated to .Language.Direction (deprecated in Hugo v0.158.0)
+- .Page.IsNode deprecated — Migrated to .Page.IsBranch / not .Page.IsPage (deprecated in Hugo v0.163.0)
 
 ## [2.10.0] - 2022-09-17
 
